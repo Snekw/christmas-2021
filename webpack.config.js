@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const path = require('path')
 
 module.exports = {
@@ -14,7 +15,6 @@ module.exports = {
         ]
     },
     devServer: {
-        contentBase: path.join(__dirname, 'dist'),
         compress: true
     },
     resolve: {
@@ -32,6 +32,13 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             title: 'lcjs-typescript-example'
-        })
+        }),
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: 'static/**/*.(png|webp|gif|mp4|jpg|ttf)',
+                },
+            ],
+        }),
     ]
 }
